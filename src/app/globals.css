@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FDF8F0;
+  --foreground: #1E0E02;
+  --orange: #E8651A;
+  --orange-light: #F97316;
+  --orange-pale: #FEE8D6;
+  --cream-dark: #F5ECD7;
+  --brown-mid: #4A2C0A;
+  --muted: #9A7B5E;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-pad {
+    @apply px-4 py-16 md:px-8 md:py-24;
+  }
+
+  .container-max {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .btn-primary {
+    @apply inline-block bg-brand-orange text-white font-semibold px-6 py-3 rounded-full
+           hover:bg-brand-orange-dark active:scale-95 transition-all duration-200
+           shadow-lg shadow-orange-200/50 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-block border-2 border-brand-orange text-brand-orange font-semibold px-6 py-3 rounded-full
+           hover:bg-brand-orange hover:text-white active:scale-95 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-sm border border-brand-cream-dark
+           hover:shadow-md transition-shadow duration-200;
+  }
+}
