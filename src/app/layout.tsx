@@ -31,7 +31,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+  let settings = null;
+  try {
+    settings = await prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+  } catch (e) {
+    console.warn('Failed to fetch site settings during build, using defaults.', e);
+  }
   
   const whatsappNumber = settings?.whatsappNumber || '8801700000000';
   const contactEmail = settings?.contactEmail || 'hello@digiboostbd.com';

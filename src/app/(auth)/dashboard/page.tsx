@@ -27,6 +27,8 @@ const tierConfig: Record<string, { label: string; color: string; icon: string; d
   },
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 

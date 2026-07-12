@@ -20,6 +20,8 @@ export const metadata = {
   description: 'Download your marketing performance reports from DigiBoost BD.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ReportsPage() {
   const session = await getServerSession(authOptions);
 
