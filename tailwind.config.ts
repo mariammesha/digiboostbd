@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          orange: '#E8651A',
+          orange: 'rgb(var(--brand-accent-rgb) / <alpha-value>)',
           'orange-light': '#F97316',
           'orange-pale': '#FEE8D6',
           'orange-dark': '#B8490E',

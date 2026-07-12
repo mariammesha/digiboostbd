@@ -1,10 +1,8 @@
-'use client';
-
-export default function WhatsAppButton() {
+export default function WhatsAppButton({ phone = '8801700000000' }: { phone?: string }) {
   return (
     <a
       id="whatsapp-floating-btn"
-      href="https://wa.me/8801700000000?text=Hello%20DigiBoost%20BD!%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+      href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=Hello%20DigiBoost%20BD!%20I%27d%20like%20to%20know%20more%20about%20your%20services.`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

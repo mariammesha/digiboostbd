@@ -44,7 +44,9 @@ model Client {
   packageTier  PackageTier @default(BASIC)
   createdAt    DateTime    @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  invoices Invoice[]
+  reports  Report[]
 }
 
 model Package {
@@ -52,4 +54,33 @@ model Package {
   name          String
   monthlyFeeBDT Float
   description   String
+}
+
+model Invoice {
+  id          String   @id @default(cuid())
+  clientId    String
+  amountBDT   Float
+  isPaid      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  clientId    String
+  title       String
+  fileUrl     String
+  createdAt   DateTime @default(now())
+
+  client      Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model SiteSettings {
+  id             String   @id @default("singleton")
+  whatsappNumber String   @default("8801700000000")
+  contactEmail   String   @default("hello@digiboostbd.com")
+  contactAddress String   @default("Dhaka, Bangladesh")
+  accentColor    String   @default("orange")
+  updatedAt      DateTime @updatedAt
 }

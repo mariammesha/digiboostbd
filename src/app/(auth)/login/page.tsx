@@ -28,7 +28,15 @@ export default function LoginPage() {
     if (result?.error) {
       setError(result.error);
     } else {
-      router.push('/dashboard');
+      // Check session to determine role
+      const res = await fetch('/api/auth/session');
+      const session = await res.json();
+      
+      if (session?.user?.role === 'ADMIN') {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
       router.refresh();
     }
   }

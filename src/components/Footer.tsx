@@ -18,7 +18,15 @@ const quickLinks = [
   { label: 'Contact', href: '/contact' },
 ];
 
-export default function Footer() {
+export default function Footer({
+  phone = '8801700000000',
+  email = 'hello@digiboostbd.com',
+  address = 'Dhaka, Bangladesh',
+}: {
+  phone?: string;
+  email?: string;
+  address?: string;
+}) {
   return (
     <footer className="bg-brand-brown text-brand-cream">
       <div className="container-max px-4 md:px-8 py-14">
@@ -57,7 +65,7 @@ export default function Footer() {
                 IG
               </a>
               <a
-                href="https://wa.me/8801700000000"
+                href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -105,9 +113,9 @@ export default function Footer() {
               ))}
             </ul>
             <div className="text-sm text-brand-cream/60">
-              <p>📞 +880 1700-000000</p>
-              <p className="mt-1">✉️ hello@digiboostbd.com</p>
-              <p className="mt-1">📍 Dhaka, Bangladesh</p>
+              <p>📞 {phone}</p>
+              <p className="mt-1">✉️ {email}</p>
+              <p className="mt-1">📍 {address}</p>
             </div>
           </div>
         </div>
