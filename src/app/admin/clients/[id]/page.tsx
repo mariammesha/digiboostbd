@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { markInvoicePaid, createReport } from '../../actions';
+import { markInvoicePaid } from '../../actions';
+import ReportUploadForm from './ReportUploadForm';
 
 export default async function ClientDetail({ params }: { params: { id: string } }) {
   const client = await prisma.client.findUnique({
@@ -16,16 +17,6 @@ export default async function ClientDetail({ params }: { params: { id: string } 
   if (!client) {
     notFound();
   }
-
-  // Define the server action wrappers that bind the ID to the form submission
-  const addReport = async (formData: FormData) => {
-    'use server';
-    const title = formData.get('title') as string;
-    const fileUrl = formData.get('fileUrl') as string;
-    if (title && fileUrl) {
-      await createReport(client.id, title, fileUrl);
-    }
-  };
 
   const markPaid = async (formData: FormData) => {
     'use server';
@@ -82,48 +73,46 @@ export default async function ClientDetail({ params }: { params: { id: string } 
 
           {/* Reports Section */}
           <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
-            <h2 className="text-xl font-semibold mb-4 border-b border-slate-700 pb-2">Reports</h2>
+            <h2 className="text-xl font-semibold mb-4 border-b border-slate-700 pb-2">
+              Reports
+              <span className="ml-2 text-sm font-normal text-slate-400">({client.reports.length} total)</span>
+            </h2>
             
+            {/* Existing reports list */}
             {client.reports.length === 0 ? (
               <p className="text-slate-500 text-sm mb-6">No reports uploaded yet.</p>
             ) : (
               <div className="space-y-3 mb-6">
                 {client.reports.map(report => (
                   <div key={report.id} className="flex justify-between items-center bg-slate-900 p-3 rounded-lg border border-slate-700">
-                    <div>
-                      <p className="font-medium text-slate-200">{report.title}</p>
-                      <p className="text-xs text-slate-500">{report.createdAt.toLocaleDateString()}</p>
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-red-400 text-lg flex-shrink-0">📄</span>
+                      <div className="min-w-0">
+                        <p className="font-medium text-slate-200 truncate">{report.title}</p>
+                        <p className="text-xs text-slate-500">
+                          Uploaded {report.createdAt.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </p>
+                      </div>
                     </div>
-                    <a href={report.fileUrl} target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-400 text-sm font-medium">
-                      View Report ↗
+                    <a
+                      href={report.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-orange-500 hover:text-orange-400 text-sm font-medium flex-shrink-0 ml-3"
+                    >
+                      View ↗
                     </a>
                   </div>
                 ))}
               </div>
             )}
 
-            <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-              <h3 className="font-medium text-sm text-slate-300 mb-3">Add New Report</h3>
-              <form action={addReport} className="flex flex-col gap-3">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Report Title (e.g., July SEO Audit)"
-                  required
-                  className="bg-slate-800 border border-slate-600 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500"
-                />
-                <input
-                  type="url"
-                  name="fileUrl"
-                  placeholder="File URL (Google Drive, PDF link, etc.)"
-                  required
-                  className="bg-slate-800 border border-slate-600 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-orange-500"
-                />
-                <button type="submit" className="bg-orange-600 hover:bg-orange-500 text-white font-medium py-2 rounded text-sm transition-colors mt-1">
-                  Upload Report
-                </button>
-              </form>
-            </div>
+            {/* Upload form */}
+            <ReportUploadForm clientId={client.id} />
           </div>
 
         </div>
@@ -167,8 +156,6 @@ export default async function ClientDetail({ params }: { params: { id: string } 
                 ))}
               </div>
             )}
-            
-            {/* Note: Generating an invoice would usually happen on a schedule or manual trigger, simplified here for the dashboard view */}
           </div>
         </div>
       </div>

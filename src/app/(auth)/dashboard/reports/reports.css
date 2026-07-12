@@ -1,0 +1,183 @@
+/* ── Nav bar extension ───────────────────────────── */
+.dash-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dash-nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(248, 250, 252, 0.55);
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dash-nav-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #f8fafc;
+}
+
+.dash-nav-link--active {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.dash-nav-link--active:hover {
+  background: rgba(245, 158, 11, 0.18);
+  color: #f59e0b;
+}
+
+/* ── Reports page header ─────────────────────────── */
+.reports-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  animation: slideUp 0.4s ease;
+}
+
+.reports-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4));
+}
+
+.reports-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 0.2rem;
+  line-height: 1.15;
+}
+
+.reports-subtitle {
+  font-size: 0.9rem;
+  color: rgba(248, 250, 252, 0.5);
+  margin: 0;
+}
+
+/* ── Empty state ─────────────────────────────────── */
+.reports-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  animation: slideUp 0.5s ease 0.1s both;
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0 0 0.75rem;
+}
+
+.empty-body {
+  font-size: 0.875rem;
+  color: rgba(248, 250, 252, 0.45);
+  margin: 0 auto;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+/* ── Reports list ────────────────────────────────── */
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.report-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.1rem 1.25rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  animation: slideUp 0.4s ease both;
+}
+
+.report-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateY(-1px);
+}
+
+.report-pdf-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 0.6rem;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.report-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.report-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0 0 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-date {
+  font-size: 0.78rem;
+  color: rgba(248, 250, 252, 0.4);
+  margin: 0;
+}
+
+/* ── Download button ─────────────────────────────── */
+.report-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1a1a1a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.report-download-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.report-download-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .reports-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .reports-title { font-size: 1.5rem; }
+  .dash-nav { display: none; }
+  .report-card { flex-wrap: wrap; }
+  .report-download-btn { width: 100%; justify-content: center; }
+}

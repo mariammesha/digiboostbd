@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import SignOutButton from './SignOutButton';
+import Link from 'next/link';
 import './dashboard.css';
 
 const tierConfig: Record<string, { label: string; color: string; icon: string; description: string }> = {
@@ -35,7 +36,7 @@ export default async function DashboardPage() {
 
   const client = await prisma.client.findUnique({
     where: { userId: session.user.id },
-    include: { user: true },
+    include: { user: true, reports: true },
   });
 
   if (!client) {
@@ -49,6 +50,8 @@ export default async function DashboardPage() {
     day: 'numeric',
   });
 
+  const reportCount = client.reports.length;
+
   return (
     <div className="dash-bg">
       {/* Top bar */}
@@ -57,6 +60,27 @@ export default async function DashboardPage() {
           <span className="logo-icon">⚡</span>
           <span className="logo-text">DigiBoost BD</span>
         </div>
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          <Link
+            href="/dashboard"
+            style={{
+              fontSize: '0.875rem', fontWeight: 500,
+              padding: '0.4rem 0.85rem', borderRadius: '0.5rem', textDecoration: 'none',
+              background: 'rgba(245,158,11,0.12)', color: '#f59e0b',
+            }}
+          >
+            Overview
+          </Link>
+          <Link
+            href="/dashboard/reports"
+            style={{
+              fontSize: '0.875rem', fontWeight: 500, color: 'rgba(248,250,252,0.55)',
+              padding: '0.4rem 0.85rem', borderRadius: '0.5rem', textDecoration: 'none',
+            }}
+          >
+            Reports
+          </Link>
+        </nav>
         <SignOutButton />
       </header>
 
@@ -123,16 +147,36 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Coming soon banner */}
-        <div className="coming-soon">
-          <span className="cs-icon">🔧</span>
-          <div>
-            <p className="cs-title">Dashboard reports coming soon</p>
-            <p className="cs-body">
-              Campaign analytics, invoice history, and performance metrics will be available in the next release.
-            </p>
+        {/* Reports CTA */}
+        <Link href="/dashboard/reports" style={{ textDecoration: 'none' }}>
+          <div className="coming-soon" style={{ cursor: 'pointer', transition: 'background 0.2s, border-color 0.2s' }}>
+            <span className="cs-icon">📊</span>
+            <div style={{ flex: 1 }}>
+              <p className="cs-title">
+                My Reports
+                {reportCount > 0 && (
+                  <span style={{
+                    marginLeft: '0.6rem',
+                    background: 'rgba(245,158,11,0.2)',
+                    border: '1px solid rgba(245,158,11,0.4)',
+                    borderRadius: '1rem',
+                    padding: '0.1rem 0.55rem',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                  }}>
+                    {reportCount}
+                  </span>
+                )}
+              </p>
+              <p className="cs-body">
+                {reportCount === 0
+                  ? 'No reports yet — your account manager will upload campaign reports here.'
+                  : `You have ${reportCount} report${reportCount === 1 ? '' : 's'} available. Click to view and download.`}
+              </p>
+            </div>
+            <span style={{ color: '#f59e0b', fontSize: '1.2rem', flexShrink: 0 }}>→</span>
           </div>
-        </div>
+        </Link>
       </main>
     </div>
   );
