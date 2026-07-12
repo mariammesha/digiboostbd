@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import NextAuthProvider from '@/components/NextAuthProvider';
 
 export const metadata: Metadata = {
   title: 'DigiBoost BD — Affordable Digital Marketing for Bangladeshi Businesses',
@@ -25,10 +26,12 @@ export default function RootLayout({
   return (
     <html lang="bn">
       <body className="bg-brand-cream text-brand-brown font-sans antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <NextAuthProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </NextAuthProvider>
       </body>
     </html>
   );

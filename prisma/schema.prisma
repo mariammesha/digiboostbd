@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+enum PackageTier {
+  BASIC
+  STANDARD
+  PREMIUM
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(CLIENT)
+  createdAt    DateTime @default(now())
+
+  client Client?
+}
+
+model Client {
+  id           String      @id @default(cuid())
+  userId       String      @unique
+  businessName String
+  phone        String
+  packageTier  PackageTier @default(BASIC)
+  createdAt    DateTime    @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Package {
+  id            String  @id @default(cuid())
+  name          String
+  monthlyFeeBDT Float
+  description   String
+}

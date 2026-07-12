@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: digiboostbd_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: digiboostbd
+      POSTGRES_USER: digiboost
+      POSTGRES_PASSWORD: digiboost_pass
+    ports:
+      - '5432:5432'
+    volumes:
+      - digiboostbd_pgdata:/var/lib/postgresql/data
+
+volumes:
+  digiboostbd_pgdata:
+    driver: local
