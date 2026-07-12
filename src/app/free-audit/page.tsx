@@ -40,6 +40,7 @@ export default function FreeAuditPage() {
   const [form, setForm] = useState<FormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -48,14 +49,30 @@ export default function FreeAuditPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
-    // Simulate async submission — no backend yet
-    setTimeout(() => {
-      setLoading(false);
+    setError(null);
+    
+    try {
+      const response = await fetch('/api/audit-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
       setSubmitted(true);
-    }, 800);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   const inputClass =
@@ -260,6 +277,11 @@ export default function FreeAuditPage() {
             </div>
 
             {/* Submit */}
+            {error && (
+              <div className="p-4 rounded-xl bg-red-50 text-red-600 text-sm font-medium border border-red-100">
+                {error}
+              </div>
+            )}
             <button
               id="free-audit-submit"
               type="submit"

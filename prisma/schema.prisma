@@ -84,3 +84,21 @@ model SiteSettings {
   accentColor    String   @default("orange")
   updatedAt      DateTime @updatedAt
 }
+
+enum AuditStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+}
+
+model AuditRequest {
+  id                 String      @id @default(cuid())
+  businessName       String
+  ownerName          String
+  phone              String
+  businessType       String
+  websiteOrPage      String?
+  marketingChallenge String
+  status             AuditStatus @default(NEW)
+  createdAt          DateTime    @default(now())
+}
