@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true, data: auditRequest }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Audit request creation error:', error);
     return NextResponse.json(
       { error: 'Failed to submit audit request' },
