@@ -225,12 +225,22 @@ export default function HomePage() {
             Book a free 30-minute audit call and we&apos;ll tell you exactly what&apos;s holding your digital
             presence back — and how to fix it.
           </p>
-          <Link
-            href="/free-audit"
-            className="inline-block bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-brand-orange-dark transition-colors shadow-lg shadow-brand-orange/30"
-          >
-            Get Your Free Audit →
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/free-audit"
+              className="inline-block bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-brand-orange-dark transition-colors shadow-lg shadow-brand-orange/30"
+            >
+              Get Your Free Audit →
+            </Link>
+            <a
+              href="https://wa.me/8801752993428?text=Hello%20DigiBoost%20BD!%20I%27d%20like%20to%20know%20more%20about%20your%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#25D366] text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-[#1ea855] transition-colors"
+            >
+              💬 Chat on WhatsApp
+            </a>
+          </div>
         </div>
       </section>
     </>

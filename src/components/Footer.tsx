@@ -116,10 +116,33 @@ export default function Footer({
                 </li>
               ))}
             </ul>
-            <div className="text-sm text-brand-cream/60">
-              <p>📞 {phone}</p>
-              <p className="mt-1">✉️ {email}</p>
-              <p className="mt-1">📍 {address}</p>
+            <div className="text-sm text-brand-cream/60 space-y-1">
+              <p>
+                <a
+                  href={`tel:+${phone.replace(/[^0-9]/g, '')}`}
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  📞 +{phone.replace(/[^0-9]/g, '').replace(/^88/, '88 ').replace(/(\d{4})(\d{3})(\d{4})$/, '$1-$2-$3')}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={`mailto:${email}`}
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  ✉️ {email}
+                </a>
+              </p>
+              <p>
+                <a
+                  href="https://maps.google.com/?q=Sylhet,+Bangladesh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-orange transition-colors"
+                >
+                  📍 {address}
+                </a>
+              </p>
             </div>
           </div>
         </div>

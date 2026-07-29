@@ -211,7 +211,7 @@ export default function FreeAuditPage() {
                 name="phone"
                 type="tel"
                 required
-                placeholder="+880 1700-000000"
+                placeholder="+880 1XXX-XXXXXX"
                 value={form.phone}
                 onChange={handleChange}
                 className={inputClass}

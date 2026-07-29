@@ -154,12 +154,22 @@ export default function AboutPage() {
           <p className="text-brand-cream/70 mb-8 max-w-md mx-auto">
             Start with a free audit. No pressure, no commitment — just honest advice.
           </p>
-          <Link
-            href="/free-audit"
-            className="inline-block bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-brand-orange-dark transition-colors"
-          >
-            Get a Free Audit →
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/free-audit"
+              className="inline-block bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-brand-orange-dark transition-colors"
+            >
+              Get a Free Audit →
+            </Link>
+            <a
+              href="https://wa.me/8801752993428?text=Hello%20DigiBoost%20BD!%20I%27d%20like%20to%20know%20more."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#25D366] text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-[#1ea855] transition-colors"
+            >
+              💬 Chat on WhatsApp
+            </a>
+          </div>
         </div>
       </section>
     </>
