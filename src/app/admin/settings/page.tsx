@@ -12,7 +12,7 @@ export default async function SettingsPage() {
     contactAddress: 'Sylhet, Bangladesh',
     facebookUrl: 'https://www.facebook.com/share/1Dd569DHdW/',
     instagramUrl: 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr',
-    accentColor: 'orange',
+    accentColor: 'gold',
   };
 
   async function updateSettings(formData: FormData) {
@@ -103,18 +103,27 @@ export default async function SettingsPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Accent Color</label>
-          <div className="flex gap-4">
-            {['orange', 'blue', 'green', 'purple'].map((color) => (
-              <label key={color} className="flex items-center gap-2 cursor-pointer">
+          <label className="block text-sm font-medium text-slate-300 mb-2">Accent Color & Theme</label>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { id: 'gold', label: 'Gold (Logo)', color: '#D4820A' },
+              { id: 'bronze', label: 'Bronze (Logo)', color: '#6B3006' },
+              { id: 'amber', label: 'Amber (Logo)', color: '#E5920F' },
+              { id: 'orange', label: 'Orange', color: '#E8651A' },
+              { id: 'blue', label: 'Blue', color: '#2563EB' },
+              { id: 'green', label: 'Green', color: '#16A34A' },
+              { id: 'purple', label: 'Purple', color: '#9333EA' },
+            ].map(({ id, label, color }) => (
+              <label key={id} className="flex items-center gap-2 p-2.5 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800/80 cursor-pointer transition-colors">
                 <input
                   type="radio"
                   name="accentColor"
-                  value={color}
-                  defaultChecked={defaultSettings.accentColor === color}
-                  className="accent-orange-500"
+                  value={id}
+                  defaultChecked={defaultSettings.accentColor === id}
+                  className="accent-amber-500"
                 />
-                <span className="capitalize text-slate-200">{color}</span>
+                <span className="w-3.5 h-3.5 rounded-full inline-block shrink-0" style={{ backgroundColor: color }} />
+                <span className="text-xs font-medium text-slate-200 capitalize">{label}</span>
               </label>
             ))}
           </div>
