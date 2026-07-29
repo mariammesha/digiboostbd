@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -63,9 +64,8 @@ export default function SignupPage() {
     <div className="auth-bg">
       <div className="auth-card">
         {/* Logo */}
-        <div className="auth-logo">
-          <span className="logo-icon">⚡</span>
-          <span className="logo-text">DigiBoost BD</span>
+        <div className="flex justify-center mb-4">
+          <Logo size="lg" />
         </div>
 
         <h1 className="auth-title">Create your account</h1>

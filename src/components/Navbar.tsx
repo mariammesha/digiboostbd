@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
+import Logo from './Logo';
 
 const navLinks = [
   { label: 'Services', href: '/services' },
@@ -19,14 +20,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur-sm border-b border-brand-cream-dark shadow-sm">
       <nav className="container-max flex items-center justify-between h-16 px-4 md:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="w-8 h-8 rounded-lg bg-brand-orange flex items-center justify-center text-white font-black text-sm group-hover:scale-110 transition-transform">
-            DB
-          </span>
-          <span className="font-bold text-lg text-brand-brown">
-            DigiBoost <span className="text-brand-orange">BD</span>
-          </span>
-        </Link>
+        <Logo size="md" />
 
         {/* Desktop Nav */}
         <ul className="hidden md:flex items-center gap-8">

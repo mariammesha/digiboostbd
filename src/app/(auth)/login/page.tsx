@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
 
-    const result = await signIn('credentials', {
+    const res = await signIn('credentials', {
       email,
       password,
       redirect: false,
@@ -25,18 +26,10 @@ export default function LoginPage() {
 
     setLoading(false);
 
-    if (result?.error) {
-      setError(result.error);
+    if (res?.error) {
+      setError('Invalid email or password');
     } else {
-      // Check session to determine role
-      const res = await fetch('/api/auth/session');
-      const session = await res.json();
-      
-      if (session?.user?.role === 'ADMIN') {
-        router.push('/admin');
-      } else {
-        router.push('/dashboard');
-      }
+      router.push('/dashboard');
       router.refresh();
     }
   }
@@ -45,9 +38,8 @@ export default function LoginPage() {
     <div className="auth-bg">
       <div className="auth-card">
         {/* Logo */}
-        <div className="auth-logo">
-          <span className="logo-icon">⚡</span>
-          <span className="logo-text">DigiBoost BD</span>
+        <div className="flex justify-center mb-4">
+          <Logo size="lg" />
         </div>
 
         <h1 className="auth-title">Welcome back</h1>

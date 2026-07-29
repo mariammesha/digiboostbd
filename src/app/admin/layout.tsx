@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import SignOutButton from '@/app/(auth)/dashboard/SignOutButton';
+import Logo from '@/components/Logo';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -18,8 +19,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <aside className="w-64 bg-slate-950 border-r border-slate-800 flex flex-col hidden md:flex">
         <div className="h-16 flex items-center px-6 border-b border-slate-800">
-          <Link href="/admin" className="font-bold text-lg text-white flex items-center gap-2">
-            <span className="text-orange-500">⚡</span> Admin Panel
+          <Link href="/admin" className="font-bold text-lg text-white flex items-center gap-2.5">
+            <Logo variant="icon" size="sm" href={null} /> Admin Panel
           </Link>
         </div>
         
@@ -48,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Mobile Header */}
         <header className="h-16 bg-slate-950 border-b border-slate-800 flex items-center justify-between px-4 md:hidden">
           <Link href="/admin" className="font-bold text-white flex items-center gap-2">
-            <span className="text-orange-500">⚡</span> Admin Panel
+            <Logo variant="icon" size="sm" href={null} /> Admin Panel
           </Link>
           <div className="flex gap-4 items-center">
             <Link href="/admin/clients" className="text-sm text-slate-300">Clients</Link>

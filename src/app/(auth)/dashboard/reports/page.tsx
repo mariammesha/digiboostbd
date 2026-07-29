@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import SignOutButton from '../SignOutButton';
+import Logo from '@/components/Logo';
 import '../dashboard.css';
 import './reports.css';
 
@@ -52,10 +53,7 @@ export default async function ReportsPage() {
     <div className="dash-bg">
       {/* Top bar */}
       <header className="dash-header">
-        <div className="dash-logo">
-          <span className="logo-icon">⚡</span>
-          <span className="logo-text">DigiBoost BD</span>
-        </div>
+        <Logo size="md" />
         <nav className="dash-nav">
           <Link href="/dashboard" className="dash-nav-link">
             Overview

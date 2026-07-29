@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import SignOutButton from './SignOutButton';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 import './dashboard.css';
 
 const tierConfig: Record<string, { label: string; color: string; icon: string; description: string }> = {
@@ -58,10 +59,7 @@ export default async function DashboardPage() {
     <div className="dash-bg">
       {/* Top bar */}
       <header className="dash-header">
-        <div className="dash-logo">
-          <span className="logo-icon">⚡</span>
-          <span className="logo-text">DigiBoost BD</span>
-        </div>
+        <Logo size="md" />
         <nav style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
           <Link
             href="/dashboard"

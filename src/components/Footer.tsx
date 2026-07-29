@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logo from './Logo';
 
 const services = [
   'Social Media Marketing',
@@ -13,10 +14,18 @@ const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Free Audit', href: '/free-audit' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Free Audit', href: '/free-audit' },
 ];
+
+interface FooterProps {
+  phone?: string;
+  email?: string;
+  address?: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
+}
 
 export default function Footer({
   phone = '8801752993428',
@@ -24,26 +33,15 @@ export default function Footer({
   address = 'Sylhet, Bangladesh',
   facebookUrl = 'https://www.facebook.com/share/1Dd569DHdW/',
   instagramUrl = 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr',
-}: {
-  phone?: string;
-  email?: string;
-  address?: string;
-  facebookUrl?: string;
-  instagramUrl?: string;
-}) {
+}: FooterProps) {
   return (
     <footer className="bg-brand-brown text-brand-cream">
       <div className="container-max px-4 md:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-8 h-8 rounded-lg bg-brand-orange flex items-center justify-center text-white font-black text-sm">
-                DB
-              </span>
-              <span className="font-bold text-lg">
-                DigiBoost <span className="text-brand-orange">BD</span>
-              </span>
+            <div className="mb-4">
+              <Logo light size="md" />
             </div>
             <p className="text-sm text-brand-cream/70 leading-relaxed max-w-xs">
               Affordable, transparent digital marketing built specifically for Bangladeshi small

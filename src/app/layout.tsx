@@ -11,11 +11,24 @@ export const metadata: Metadata = {
   description:
     'DigiBoost BD offers transparent, affordable digital marketing for Bangladeshi small businesses — from social media and SEO to paid ads and content creation.',
   keywords: 'digital marketing Bangladesh, SME marketing, Facebook ads Bangladesh, SEO Bangladesh',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/logo-icon.png',
+    apple: '/icon.png',
+  },
   openGraph: {
     title: 'DigiBoost BD — Digital Marketing for Bangladeshi SMEs',
     description: 'Affordable, transparent digital marketing built for Bangladesh small businesses.',
     locale: 'bn_BD',
     type: 'website',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'DigiBoost BD Logo',
+      },
+    ],
   },
 };
 
