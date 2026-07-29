@@ -26,6 +26,10 @@ const ACCENT_COLORS_RGB: Record<string, string> = {
   purple: '147 51 234', // #9333EA
 };
 
+// Force layout to re-render on every request so footer contact info
+// is always read fresh from the database, not baked into the static build.
+export const dynamic = 'force-dynamic';
+
 export default async function RootLayout({
   children,
 }: Readonly<{
