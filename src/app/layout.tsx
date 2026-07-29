@@ -54,19 +54,19 @@ export default async function RootLayout({
   } catch (e) {
     console.warn('Failed to fetch site settings during build, using defaults.', e);
   }
-  
+
   const whatsappNumber = settings?.whatsappNumber || '8801752993428';
   const contactEmail = settings?.contactEmail || 'dgboostbd@gmail.com';
   const contactAddress = settings?.contactAddress || 'Sylhet, Bangladesh';
   const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/share/1Dd569DHdW/';
   const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr';
   const accentColorKey = settings?.accentColor || 'orange';
-  
+
   const colorRgb = ACCENT_COLORS_RGB[accentColorKey] || ACCENT_COLORS_RGB.orange;
 
   return (
     <html lang="bn">
-      <body 
+      <body
         className="bg-brand-cream text-brand-brown font-sans antialiased"
         style={{ '--brand-accent-rgb': colorRgb } as React.CSSProperties}
       >

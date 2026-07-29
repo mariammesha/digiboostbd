@@ -44,7 +44,7 @@ export default async function SettingsPage() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-3xl font-bold mb-8">Site Settings</h1>
-      
+
       <form action={updateSettings} className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-sm space-y-6">
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">WhatsApp Number</label>
