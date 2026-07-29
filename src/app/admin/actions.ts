@@ -42,3 +42,27 @@ export async function createReport(clientId: string, title: string, fileUrl: str
 
   revalidatePath('/admin/clients/[id]', 'page');
 }
+
+export async function updateSiteSettings(data: {
+  whatsappNumber: string;
+  contactEmail: string;
+  contactAddress: string;
+  facebookUrl: string;
+  instagramUrl: string;
+  accentColor: string;
+}) {
+  await requireAdmin();
+
+  await prisma.siteSettings.upsert({
+    where: { id: 'singleton' },
+    update: data,
+    create: {
+      id: 'singleton',
+      ...data,
+    },
+  });
+
+  revalidatePath('/', 'layout');
+  revalidatePath('/admin/settings', 'page');
+  return { success: true };
+}
