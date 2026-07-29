@@ -104,17 +104,15 @@ export default async function SettingsPage() {
 
         <div>
           <label className="block text-sm font-medium text-slate-300 mb-2">Accent Color & Theme</label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
             {[
-              { id: 'gold', label: 'Gold (Logo)', color: '#D4820A' },
-              { id: 'bronze', label: 'Bronze (Logo)', color: '#6B3006' },
-              { id: 'amber', label: 'Amber (Logo)', color: '#E5920F' },
-              { id: 'orange', label: 'Orange', color: '#E8651A' },
-              { id: 'blue', label: 'Blue', color: '#2563EB' },
-              { id: 'green', label: 'Green', color: '#16A34A' },
-              { id: 'purple', label: 'Purple', color: '#9333EA' },
-            ].map(({ id, label, color }) => (
-              <label key={id} className="flex items-center gap-2 p-2.5 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800/80 cursor-pointer transition-colors">
+              { id: 'gold', label: 'Golden Brown (Logo)', primary: '#D4820A', secondary: '#6B3006' },
+              { id: 'orange', label: 'Orange', primary: '#E8651A' },
+              { id: 'blue', label: 'Blue', primary: '#2563EB' },
+              { id: 'green', label: 'Green', primary: '#16A34A' },
+              { id: 'purple', label: 'Purple', primary: '#9333EA' },
+            ].map(({ id, label, primary, secondary }) => (
+              <label key={id} className="flex items-center gap-2.5 p-2.5 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800/80 cursor-pointer transition-colors">
                 <input
                   type="radio"
                   name="accentColor"
@@ -122,8 +120,11 @@ export default async function SettingsPage() {
                   defaultChecked={defaultSettings.accentColor === id}
                   className="accent-amber-500"
                 />
-                <span className="w-3.5 h-3.5 rounded-full inline-block shrink-0" style={{ backgroundColor: color }} />
-                <span className="text-xs font-medium text-slate-200 capitalize">{label}</span>
+                <div className="flex items-center gap-1 shrink-0">
+                  <span className="w-3.5 h-3.5 rounded-full inline-block shadow-sm" style={{ backgroundColor: primary }} />
+                  {secondary && <span className="w-3.5 h-3.5 rounded-full inline-block shadow-sm -ml-1.5 border border-slate-900" style={{ backgroundColor: secondary }} />}
+                </div>
+                <span className="text-xs font-medium text-slate-200">{label}</span>
               </label>
             ))}
           </div>

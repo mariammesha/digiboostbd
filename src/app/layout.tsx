@@ -33,10 +33,11 @@ export const metadata: Metadata = {
 };
 
 const ACCENT_COLORS_RGB: Record<string, string> = {
-  orange: '232 101 26', // #E8651A
-  blue: '37 99 235', // #2563EB
-  green: '22 163 74', // #16A34A
-  purple: '147 51 234', // #9333EA
+  gold: '212 130 10', // #D4820A (Golden Brown — Logo Theme)
+  orange: '232 101 26', // #E8651A (Classic Brand)
+  blue: '37 99 235', // #2563EB (Corporate)
+  green: '22 163 74', // #16A34A (Growth)
+  purple: '147 51 234', // #9333EA (Royal Purple)
 };
 
 // Force layout to re-render on every request so footer contact info
