@@ -37,12 +37,20 @@ async function main() {
 
   const settings = await prisma.siteSettings.upsert({
     where: { id: 'singleton' },
-    update: {},
+    update: {
+      whatsappNumber: '8801752993428',
+      contactEmail: 'dgboostbd@gmail.com',
+      contactAddress: 'Sylhet, Bangladesh',
+      facebookUrl: 'https://www.facebook.com/share/1Dd569DHdW/',
+      instagramUrl: 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr',
+    },
     create: {
       id: 'singleton',
-      whatsappNumber: '8801700000000',
-      contactEmail: 'hello@digiboostbd.com',
-      contactAddress: 'Dhaka, Bangladesh',
+      whatsappNumber: '8801752993428',
+      contactEmail: 'dgboostbd@gmail.com',
+      contactAddress: 'Sylhet, Bangladesh',
+      facebookUrl: 'https://www.facebook.com/share/1Dd569DHdW/',
+      instagramUrl: 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr',
       accentColor: 'orange',
     },
   });

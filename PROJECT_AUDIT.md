@@ -1,4 +1,4 @@
-﻿# DigiBoost BD — Project Audit Report
+# DigiBoost BD — Project Audit Report
 
 > **Generated:** 2026-07-12
 > **Scope:** Full read-only codebase audit
@@ -329,9 +329,9 @@ All variables are read from .env.local. See .env.local.example for the template.
 
 | # | File | Line | Issue |
 |---|---|---|---|
-| 7 | src/app/contact/page.tsx | 14-15 | Phone number (+880 1700-000000) and WhatsApp link (wa.me/8801700000000) are hardcoded in the contactDetails array. The Footer and WhatsApp button correctly read from SiteSettings but this page does not. |
-| 8 | src/app/contact/page.tsx | 44, 151-154 | Google Maps link is a generic https://maps.google.com placeholder, not a real link to the Banani, Dhaka office location. |
-| 9 | src/components/Footer.tsx | 50, 58 | Social media links are https://facebook.com and https://instagram.com (homepage roots), not real DigiBoost BD page URLs. |
+| 7 | src/app/contact/page.tsx | — | ~~Phone number and WhatsApp link are hardcoded~~ **RESOLVED**: Connected ContactPage to SiteSettings in database with dynamic phone/WhatsApp and updated email (`dgboostbd@gmail.com`). |
+| 8 | src/app/contact/page.tsx | — | ~~Google Maps link placeholder~~ **RESOLVED**: Updated map link to target Banani, Dhaka location. |
+| 9 | src/components/Footer.tsx | — | ~~Social media links are generic domain roots~~ **RESOLVED**: Updated Facebook and Instagram links to official DigiBoost BD pages (`facebook.com/share/1Dd569DHdW/` and `instagram.com/dgboost.bd`). |
 | 10 | src/app/about/page.tsx | 33-52 | Team members are fictitious placeholders (Rafiq Hossain, Nadia Akter, Karim Uddin) with initials-only avatars and no real photos. |
 | 11 | src/app/page.tsx | 43-48 | Stats are hardcoded (200+ SMEs Helped, 2Cr+ Ad Spend Managed, 40% Avg. Lead Increase). These are not pulled from the database. |
 | 12 | .env.local.example | 17-18 | Admin credentials are stored in the example env file in plaintext. The ADMIN_EMAIL and ADMIN_PASSWORD values should be rotated and not stored in any version-controlled file, even as examples. |

@@ -38,9 +38,11 @@ export default async function RootLayout({
     console.warn('Failed to fetch site settings during build, using defaults.', e);
   }
   
-  const whatsappNumber = settings?.whatsappNumber || '8801700000000';
-  const contactEmail = settings?.contactEmail || 'hello@digiboostbd.com';
-  const contactAddress = settings?.contactAddress || 'Dhaka, Bangladesh';
+  const whatsappNumber = settings?.whatsappNumber || '8801752993428';
+  const contactEmail = settings?.contactEmail || 'dgboostbd@gmail.com';
+  const contactAddress = settings?.contactAddress || 'Sylhet, Bangladesh';
+  const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/share/1Dd569DHdW/';
+  const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr';
   const accentColorKey = settings?.accentColor || 'orange';
   
   const colorRgb = ACCENT_COLORS_RGB[accentColorKey] || ACCENT_COLORS_RGB.orange;
@@ -54,7 +56,13 @@ export default async function RootLayout({
         <NextAuthProvider>
           <Navbar />
           <main>{children}</main>
-          <Footer phone={whatsappNumber} email={contactEmail} address={contactAddress} />
+          <Footer
+            phone={whatsappNumber}
+            email={contactEmail}
+            address={contactAddress}
+            facebookUrl={facebookUrl}
+            instagramUrl={instagramUrl}
+          />
           <WhatsAppButton phone={whatsappNumber} />
         </NextAuthProvider>
       </body>

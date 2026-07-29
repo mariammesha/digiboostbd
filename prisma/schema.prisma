@@ -23,6 +23,12 @@ enum PackageTier {
   PREMIUM
 }
 
+enum AuditStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+}
+
 // ─── Models ───────────────────────────────────────────────────────────────────
 
 model User {
@@ -78,17 +84,13 @@ model Report {
 
 model SiteSettings {
   id             String   @id @default("singleton")
-  whatsappNumber String   @default("8801700000000")
-  contactEmail   String   @default("hello@digiboostbd.com")
-  contactAddress String   @default("Dhaka, Bangladesh")
+  whatsappNumber String   @default("8801752993428")
+  contactEmail   String   @default("dgboostbd@gmail.com")
+  contactAddress String   @default("Sylhet, Bangladesh")
+  facebookUrl    String   @default("https://www.facebook.com/share/1Dd569DHdW/")
+  instagramUrl   String   @default("https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr")
   accentColor    String   @default("orange")
   updatedAt      DateTime @updatedAt
-}
-
-enum AuditStatus {
-  NEW
-  CONTACTED
-  CONVERTED
 }
 
 model AuditRequest {

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Contact Us — DigiBoost BD',
@@ -7,55 +8,78 @@ export const metadata: Metadata = {
     'Get in touch with DigiBoost BD. Reach us by phone, WhatsApp, email, or visit us in Dhaka, Bangladesh.',
 };
 
-const contactDetails = [
-  {
-    icon: '📞',
-    label: 'Phone & WhatsApp',
-    value: '+880 1700-000000',
-    href: 'tel:+8801700000000',
-    actionLabel: 'Call Now',
-  },
-  {
-    icon: '💬',
-    label: 'WhatsApp Chat',
-    value: 'Click to open WhatsApp',
-    href: 'https://wa.me/8801700000000?text=Hello%20DigiBoost%20BD!',
-    actionLabel: 'Chat on WhatsApp',
-    external: true,
-  },
-  {
-    icon: '✉️',
-    label: 'Email',
-    value: 'hello@digiboostbd.com',
-    href: 'mailto:hello@digiboostbd.com',
-    actionLabel: 'Send Email',
-  },
-  {
-    icon: '⏰',
-    label: 'Business Hours',
-    value: 'Sat–Thu: 9am – 7pm (BST)',
-    href: null,
-    actionLabel: null,
-  },
-  {
-    icon: '📍',
-    label: 'Office',
-    value: 'Banani, Dhaka-1213, Bangladesh',
-    href: 'https://maps.google.com',
-    actionLabel: 'Get Directions',
-    external: true,
-  },
-  {
-    icon: '📘',
-    label: 'Facebook Page',
-    value: 'facebook.com/digiboostbd',
-    href: 'https://facebook.com',
-    actionLabel: 'Follow Us',
-    external: true,
-  },
-];
+export default async function ContactPage() {
+  let settings = null;
+  try {
+    settings = await prisma.siteSettings.findUnique({ where: { id: 'singleton' } });
+  } catch {
+    console.warn('Failed to fetch site settings on contact page, using defaults.');
+  }
 
-export default function ContactPage() {
+  const phone = settings?.whatsappNumber || '8801752993428';
+  const cleanPhone = phone.replace(/[^0-9]/g, '');
+  const email = settings?.contactEmail || 'dgboostbd@gmail.com';
+  const address = settings?.contactAddress || 'Sylhet, Bangladesh';
+  const facebookUrl = settings?.facebookUrl || 'https://www.facebook.com/share/1Dd569DHdW/';
+  const instagramUrl = settings?.instagramUrl || 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr';
+  const mapUrl = 'https://maps.google.com/?q=Sylhet,+Bangladesh';
+
+  const contactDetails = [
+    {
+      icon: '📞',
+      label: 'Phone & WhatsApp',
+      value: `+${cleanPhone}`,
+      href: `tel:+${cleanPhone}`,
+      actionLabel: 'Call Now',
+    },
+    {
+      icon: '💬',
+      label: 'WhatsApp Chat',
+      value: 'Click to open WhatsApp',
+      href: `https://wa.me/${cleanPhone}?text=Hello%20DigiBoost%20BD!`,
+      actionLabel: 'Chat on WhatsApp',
+      external: true,
+    },
+    {
+      icon: '✉️',
+      label: 'Email',
+      value: email,
+      href: `mailto:${email}`,
+      actionLabel: 'Send Email',
+    },
+    {
+      icon: '⏰',
+      label: 'Business Hours',
+      value: 'Sat–Thu: 9am – 7pm (BST)',
+      href: null,
+      actionLabel: null,
+    },
+    {
+      icon: '📍',
+      label: 'Office',
+      value: address,
+      href: mapUrl,
+      actionLabel: 'Get Directions',
+      external: true,
+    },
+    {
+      icon: '📘',
+      label: 'Facebook Page',
+      value: 'DigiBoost BD Facebook',
+      href: facebookUrl,
+      actionLabel: 'Follow Us',
+      external: true,
+    },
+    {
+      icon: '📸',
+      label: 'Instagram',
+      value: '@dgboost.bd',
+      href: instagramUrl,
+      actionLabel: 'Follow Us',
+      external: true,
+    },
+  ];
+
   return (
     <>
       {/* Header */}
@@ -117,7 +141,7 @@ export default function ContactPage() {
                   get back to you within minutes during business hours.
                 </p>
                 <a
-                  href="https://wa.me/8801700000000?text=Hello%20DigiBoost%20BD!%20I%27d%20like%20to%20know%20more."
+                  href={`https://wa.me/${cleanPhone}?text=Hello%20DigiBoost%20BD!%20I%27d%20like%20to%20know%20more.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   id="contact-whatsapp-cta"
@@ -146,9 +170,9 @@ export default function ContactPage() {
               <div className="rounded-3xl bg-brand-cream-dark h-40 flex items-center justify-center border-2 border-brand-cream-dark">
                 <div className="text-center">
                   <p className="text-3xl mb-1">📍</p>
-                  <p className="text-sm text-brand-muted font-medium">Banani, Dhaka, Bangladesh</p>
+                  <p className="text-sm text-brand-muted font-medium">{address}</p>
                   <a
-                    href="https://maps.google.com"
+                    href={mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-brand-orange font-semibold hover:underline"
@@ -167,8 +191,8 @@ export default function ContactPage() {
         <div className="container-max px-4 md:px-8 text-center">
           <p className="text-brand-muted text-sm">
             Prefer email?{' '}
-            <a href="mailto:hello@digiboostbd.com" className="text-brand-orange font-semibold hover:underline">
-              hello@digiboostbd.com
+            <a href={`mailto:${email}`} className="text-brand-orange font-semibold hover:underline">
+              {email}
             </a>{' '}
             — we reply within 24 hours.
           </p>

@@ -19,13 +19,17 @@ const quickLinks = [
 ];
 
 export default function Footer({
-  phone = '8801700000000',
-  email = 'hello@digiboostbd.com',
-  address = 'Dhaka, Bangladesh',
+  phone = '8801752993428',
+  email = 'dgboostbd@gmail.com',
+  address = 'Sylhet, Bangladesh',
+  facebookUrl = 'https://www.facebook.com/share/1Dd569DHdW/',
+  instagramUrl = 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr',
 }: {
   phone?: string;
   email?: string;
   address?: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
 }) {
   return (
     <footer className="bg-brand-brown text-brand-cream">
@@ -47,7 +51,7 @@ export default function Footer({
             </p>
             <div className="mt-5 flex gap-3">
               <a
-                href="https://facebook.com"
+                href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -56,7 +60,7 @@ export default function Footer({
                 f
               </a>
               <a
-                href="https://instagram.com"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

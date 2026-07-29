@@ -7,9 +7,11 @@ export default async function SettingsPage() {
   });
 
   const defaultSettings = settings || {
-    whatsappNumber: '8801700000000',
-    contactEmail: 'hello@digiboostbd.com',
-    contactAddress: 'Dhaka, Bangladesh',
+    whatsappNumber: '8801752993428',
+    contactEmail: 'dgboostbd@gmail.com',
+    contactAddress: 'Sylhet, Bangladesh',
+    facebookUrl: 'https://www.facebook.com/share/1Dd569DHdW/',
+    instagramUrl: 'https://www.instagram.com/dgboost.bd?igsh=a3U4Ynk5NG1yNzlr',
     accentColor: 'orange',
   };
 
@@ -18,16 +20,20 @@ export default async function SettingsPage() {
     const whatsappNumber = formData.get('whatsappNumber') as string;
     const contactEmail = formData.get('contactEmail') as string;
     const contactAddress = formData.get('contactAddress') as string;
+    const facebookUrl = formData.get('facebookUrl') as string;
+    const instagramUrl = formData.get('instagramUrl') as string;
     const accentColor = formData.get('accentColor') as string;
 
     await prisma.siteSettings.upsert({
       where: { id: 'singleton' },
-      update: { whatsappNumber, contactEmail, contactAddress, accentColor },
+      update: { whatsappNumber, contactEmail, contactAddress, facebookUrl, instagramUrl, accentColor },
       create: {
         id: 'singleton',
         whatsappNumber,
         contactEmail,
         contactAddress,
+        facebookUrl,
+        instagramUrl,
         accentColor,
       },
     });
@@ -69,6 +75,28 @@ export default async function SettingsPage() {
             name="contactAddress"
             type="text"
             defaultValue={defaultSettings.contactAddress}
+            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Facebook Page URL</label>
+          <input
+            name="facebookUrl"
+            type="url"
+            defaultValue={defaultSettings.facebookUrl}
+            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Instagram Profile URL</label>
+          <input
+            name="instagramUrl"
+            type="url"
+            defaultValue={defaultSettings.instagramUrl}
             className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-orange-500"
             required
           />
